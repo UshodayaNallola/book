@@ -1,0 +1,48 @@
+.active{
+    align-items: center;
+}
+
+body{
+      font-family: 'Regular'; 
+      overflow:hidden!important;
+}
+a{
+    text-decoration: none;
+}
+.navbar{
+    position: fixed;
+    font-family: 'Regular';
+}
+.navbar-header img{
+    float:left!important;
+    width:160px;
+    height:40px;
+    margin: 5px;
+}
+.navbar-nav
+{
+ float:none;
+ text-align: center;
+}
+.navbar-nav li{
+    display: inline-block;
+    float: none;
+    width:150px;
+    font-size: 20px;
+    color:#000000;
+}
+.navbar-nav>li>a{
+    color:black;
+}
+.button {
+    background-color: #000000;
+    border: 1px;
+    color: white;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Regular';
+    font-size: 18px;
+    margin: 6px 0px;
+    cursor: pointer;
+}
