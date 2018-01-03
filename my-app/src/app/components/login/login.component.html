@@ -1,3 +1,70 @@
 <p>
   login works!
 </p>
+<div class="cont widget-query widget-query-dates-required widget-query-compact-occupancy" data-long-stays-base-url="http://groups.hotels.com/GroupForm.cfm?locale=en_US&amp;es=1" data-prefix="qf-0" tabindex="-1"><h1 class="cont-hd-alt widget-query-heading"><span class="personalised-title">Where to next?</span></h1><form class="cont-bd" action="/search.do" role="search"><div class="widget-query-group widget-query-destination"><input type="hidden" name="as-shown" value="false"><input type="text" class="clearable widget-query-autosuggest" name="q-destination" id="qf-0q-destination" aria-required="true" data-current-location="Current location" placeholder="e.g., Las Vegas" autocomplete="off" autocorrect="off" aria-haspopup="true" role="combobox" aria-label="Search" aria-autocomplete="both" aria-live="polite"><label for="qf-0q-destination">Destination, hotel, landmark, or address</label></div><div class="widget-query-group widget-query-dates"><div class="widget-query-date"><label for="qf-0q-localised-check-in" id="widget-query-label-2">Check in</label><input type="text" class="query-localised-check-in " name="q-localised-check-in" id="qf-0q-localised-check-in" placeholder="mm/dd/yy" aria-haspopup="true" aria-labelledby="widget-query-label-1 widget-query-label-2" autocomplete="off"><label role="presentation" class="aria-label" data-input="qf-0q-localised-check-in" id="widget-query-label-1"></label><input type="hidden" name="q-check-in" class="q-check-in" value=""><span class="widget-query-day"></span></div><div class="widget-query-date"><label for="qf-0q-localised-check-out" id="widget-query-label-4">Check out</label><input type="text" class="query-localised-check-out " name="q-localised-check-out" id="qf-0q-localised-check-out" placeholder="mm/dd/yy" aria-haspopup="true" aria-labelledby="widget-query-label-3 widget-query-label-4" autocomplete="off"><label role="presentation" class="aria-label" data-input="qf-0q-localised-check-out" id="widget-query-label-3"></label><input type="hidden" name="q-check-out" class="q-check-out" value=""><span class="widget-query-day"></span></div><script>var cTTl10n = 'mm\/dd\/yy';
+  function checkTodayTomorrow(){
+      var a=document.createElement("x");a.style.cssText="pointer-events:auto";
+      if(/MSIE|Trident/.test(navigator.userAgent) || !a.style.pointerEvents==="auto"){
+          return;
+      }
+      var type;
+      if(cTTl10n === 'dd/mm/yyyy'){
+          type = 'ukish';
+      }else if(cTTl10n === 'mm/dd/yy'){
+          type = 'usish';
+      }
+      function normaliseDate(ds){
+          if(type === 'usish'){
+              var da = ds.split('/');
+              return [da[1], da[0], '20' + da[2]].join('/');
+          }
+          return ds;
+      }
+      var now = new Date();
+      var today = new Date();today.setHours(0,0,0,0);
+      var tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);tomorrow.setHours(0,0,0,0);
+      var yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);yesterday.setHours(0,0,0,0);
+      var cIall = document.querySelectorAll('.query-localised-check-in');
+      var cOall = document.querySelectorAll('.query-localised-check-out');
+      for(var i=0, cI, cO; cI = cIall[i], cO = cOall[i]; i++){
+          var cID = new Date(normaliseDate(cI.value).split('/').reverse().join('-'));
+          var cOD = new Date(normaliseDate(cO.value).split('/').reverse().join('-'));
+          todayTomorrowLbl('', cI);
+          todayTomorrowLbl('', cO);
+          if(cID.getTime() - today.getTime() === 0){
+              var lbl;
+              if(now.getHours() > 20){
+                  lbl = 'Tonight';
+              }else{
+                  lbl = 'Today';
+              }
+              todayTomorrowLbl(lbl, cI);
+          }else if(cID.getTime() - tomorrow.getTime() === 0){
+              todayTomorrowLbl('Tomorrow', cI);
+          }else if(cID.getTime() - yesterday.getTime() === 0 && now.getHours() < 2){
+              todayTomorrowLbl('Tonight', cI);
+          }
+          if(cOD.getTime() - tomorrow.getTime() === 0){
+              var lbl;
+              if(now.getHours() < 2){
+                  lbl = 'Today';
+              }else{
+                  lbl = 'Tomorrow';
+              }
+              todayTomorrowLbl(lbl, cO);
+          }
+      }
+  }
+  function todayTomorrowLbl(lbl, el){
+      var old = document.getElementById(el.id + 'ttlabel');
+      old && old.parentNode.removeChild(old);
+      if(lbl){
+          var o = document.createElement('span');
+          o.id = el.id + 'ttlabel';
+          o.className = 'widget-query-ttlbl'
+          o.appendChild(document.createTextNode(lbl));
+          el.parentNode.insertBefore(o, el);
+      }
+  }
+  checkTodayTomorrow();
+      </script><span class="widget-query-nights" id="qf-0q-nights"><span><span class="widget-query-num-nights">1</span> </span> <span class="widget-query-nights-label">Night</span></span></div><div class="widget-query-group widget-query-triptype"><span>Traveling for:</span><div class="widget-query-triptype-options"><label><input type="radio" name="q-triptype" value="work">Work</label><label><input type="radio" name="q-triptype" value="leisure">Leisure</label></div></div><div class="widget-query-group widget-query-rooms"><div class="widget-query-room-number"><label for="qf-0q-rooms">Rooms</label><select name="q-rooms" class="query-rooms" id="qf-0q-rooms"><option selected="selected">1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option value="9">9+</option></select></div><div class="widget-query-group widget-query-room-options"><span class="widget-query-room-options-label">Room 1:</span><div class="widget-query-people"><div class="widget-query-adults"><label for="qf-0q-room-0-adults">Adults</label><select name="q-room-0-adults" id="qf-0q-room-0-adults"><option>1</option><option selected="selected">2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><span>Aged 18+</span></div><div class="widget-query-children"><label for="qf-0q-room-0-children">Children</label><select name="q-room-0-children" id="qf-0q-room-0-children"><option selected="selected">0</option><option>1</option><option>2</option><option>3</option></select><span>0-17</span></div></div></div></div><div class="widget-query-group widget-query-occupancy"><div class="widget-query-room-number"><label for="qf-0q-compact-occupancy">Rooms</label><select id="qf-0q-compact-occupancy"><option data-rooms="1" data-adults="1">1 room, 1 adult</option><option data-rooms="1" data-adults="2" selected="selected">1 room, 2 adults</option><option data-more-options="true">More options…</option></select></div></div><div class="widget-query-group widget-query-ft"><button type="submit" class="cta cta-strong">Search</button></div><div class="widget-query-sort"></div><div class="widget-query-filters"></div><input name="page-name" type="hidden" value="HomePage"></form></div>
