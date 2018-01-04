@@ -30,7 +30,7 @@ html,body{height:100%;}
 
 @font-face {
     font-family: 'Regular';
-    src: url('../assets/fonts/tt0855m_.ttf') format('truetype'),url('../assets/fonts/tt1161m_.ttf') format('truetype');
+    src: url('../assets/fonts/Raleway-Black.ttf') format('truetype'),url('../assets/fonts/tt1161m_.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
@@ -144,3 +144,9 @@ text-decoration-color: #E18728;
       background-color:rgba(0, 0, 0, 0.815);
       color:white;
   }
+ .ch_footer{
+    background-color:rgba(0, 0, 0, 0.815);
+    color:white;
+    font-family: 'Regular';
+    padding:16px;
+ }
